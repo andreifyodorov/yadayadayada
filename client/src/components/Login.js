@@ -1,20 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
+
 import '../style.css'
+import InputComponent from './base/InputComponent.js'
 
 
-export default class LoginPage extends Component {
-  componentDidMount() {
-    this.refs.input.focus()
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    let username = this.refs.input.value
-    if (username) {
-      this.props.action(username)
-    }
-  }
-
+export default class Login extends InputComponent {
   render() {
     return (
       <li className="login page">
@@ -30,4 +20,3 @@ export default class LoginPage extends Component {
     )
   }
 }
-

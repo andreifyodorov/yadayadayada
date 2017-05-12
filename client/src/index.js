@@ -5,7 +5,7 @@ import { createStore } from 'redux'
 import io from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 
-import App from './containers/App.js'
+import App from './containers/AppContainer.js'
 import Reducer from './reducers.js'
 
 
