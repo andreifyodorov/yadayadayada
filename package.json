@@ -8,12 +8,16 @@
   "license": "BSD",
   "dependencies": {
     "express": "4.13.4",
-    "react": "^15.5.4",
-    "react-redux": "^5.0.4",
-    "redux": "^3.6.0",
     "socket.io": "^1.7.4"
   },
   "scripts": {
-    "start": "node index.js"
+    "server": "babel-node server.js",
+    "client": "babel-node start-client.js",
+    "start": "concurrently \"PORT=3001 npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-node6": "^11.0.0",
+    "concurrently": "^3.4.0"
   }
 }
