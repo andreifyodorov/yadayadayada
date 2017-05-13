@@ -8,7 +8,7 @@ import Message from './Message.js'
 class Messages extends Component {
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      key: PropTypes.number.isRequired,
       username: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired
     }).isRequired).isRequired,
@@ -20,12 +20,7 @@ class Messages extends Component {
     return (
         <div className="chatArea">
           <ul className="messages">
-            {messages.map(message =>
-              <Message
-                key={message.id}
-                {...message}
-              />
-            )}
+            {messages.map(message => <Message {...message} /> )}
           </ul>
         </div>
     )

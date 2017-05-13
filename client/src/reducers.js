@@ -1,29 +1,33 @@
 import { combineReducers } from 'redux'
 
+import { SET_USERNAME, SEND_MESSAGE, SRV_SEND_MESSAGE } from './actions.js'
 
-const LoginPage = (state = '', action) => {
-  if (action.type === "SET_USERNAME") {
-    return action.username
-  }
-  return state
+
+const username = (state = '', action) => {
+  return action.type === SET_USERNAME
+    ? action.username
+    : state
 }
 
 
 let messageId = 0
 
-const MessagesView = (state = [], action) => {
-  if (action.type === "SEND_MESSAGE") {
-    messageId++
-    return [
-      ...state,
-      {id: messageId, username: action.username, text: action.text}
-    ]
+const messages = (state = [], action) => {
+  switch (action.type) {
+    case SEND_MESSAGE:
+    case SRV_SEND_MESSAGE:
+      return [
+        ...state,
+        {key: ++messageId, ...action.message}
+      ]
+
+    default:
+      return state
   }
-  return state
 }
 
 
 export default combineReducers({
-  username: LoginPage,
-  messages: MessagesView
+  username,
+  messages
 })

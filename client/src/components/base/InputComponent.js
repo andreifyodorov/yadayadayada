@@ -11,7 +11,7 @@ export default class Input extends Component {
     this.refs.input.focus()
   }
 
-  handleSubmit = e => {
+  _handleSubmit = e => {
     e.preventDefault()
     let input = this.refs.input
     if (input.value) {

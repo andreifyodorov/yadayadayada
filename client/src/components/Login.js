@@ -12,7 +12,7 @@ export default class Login extends InputComponent {
           <h3 className="title">
             What&apos;s your nickname?
           </h3>
-        <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this._handleSubmit}>
             <input className="usernameInput" type="text" maxLength="14" ref="input" />
           </form>
         </div>

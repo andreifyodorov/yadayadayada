@@ -11,13 +11,14 @@
     "socket.io": "^1.7.4"
   },
   "scripts": {
-    "server": "babel-node server.js",
-    "client": "babel-node start-client.js",
-    "start": "concurrently \"PORT=3001 npm run server\" \"npm run client\""
+    "server": "PORT=3001 BABEL_ENV=development babel-watch server.js",
+    "client": "cd client; npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-node6": "^11.0.0",
+    "babel-preset-react-app": "^2.2.0",
+    "babel-watch": "^2.0.6",
     "concurrently": "^3.4.0"
   }
 }

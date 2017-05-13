@@ -8,10 +8,10 @@ import Chat from './ChatContainer.js'
 import { setUsername } from '../actions.js'
 
 
-const AppContainer = ({ dispatch, userLoggedIn }) => {
+const AppContainer = ({ dispatch, loggedIn }) => {
   return (
     <Pages>
-      { userLoggedIn
+      { loggedIn
           ? <Chat />
           : <Login action={ R.compose(dispatch, setUsername) } /> }
     </Pages>
@@ -19,7 +19,7 @@ const AppContainer = ({ dispatch, userLoggedIn }) => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  userLoggedIn: Boolean(state.username)
+  loggedIn: Boolean(state.username)
 })
 
 export default connect(mapStateToProps)(AppContainer)
