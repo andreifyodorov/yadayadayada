@@ -1,13 +1,7 @@
-import React from 'react'
 import '../style.css'
+import SimpleWrapper from './base/SimpleWrapper.js'
 
 
-const Chat = ({ children }) => {
-  return (
-      <li className="chat page">
-        {children}
-      </li>
-  )
-}
+export default SimpleWrapper('ul', {className: "chat page"})
 
-export default Chat
+

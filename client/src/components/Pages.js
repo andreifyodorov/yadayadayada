@@ -1,13 +1,7 @@
-import React from 'react'
 import '../style.css'
+import SimpleWrapper from './base/SimpleWrapper.js'
 
 
-const Pages = ({ children }) => {
-  return (
-      <ul className="pages">
-        {children}
-      </ul>
-  )
-}
+export default SimpleWrapper('ul', {className: "pages"})
 
-export default Pages
+

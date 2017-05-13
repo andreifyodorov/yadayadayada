@@ -11,7 +11,7 @@
     "socket.io": "^1.7.4"
   },
   "scripts": {
-    "server": "PORT=3001 BABEL_ENV=development babel-watch server.js",
+    "server": "PORT=3001 BABEL_ENV=development babel-watch server",
     "client": "cd client; npm start",
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
