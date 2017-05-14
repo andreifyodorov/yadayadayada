@@ -4,19 +4,21 @@ export const TYPE_USER = 'TYPE_USER'
 export const TYPE_ROOM = 'TYPE_ROOM'
 
 export const Channel = (type, id) => ({type, id})   // id is username / chatroom
-export const DEFAULT_CHANNEL = Channel('TYPE_ROOM', 'yada.local')
+export const DEFAULT_CHANNEL = Channel('TYPE_ROOM', 'main')
 
 export const Message = (username, channel, text) => ({username, channel, text})
+
+
+const actionFactory = (type) => (payload) => ({ type, payload })
 
 
 // client-side action
 
 export const CHANGE_CHANNEL = 'CHANGE_CHANNEL'
+export const changeChannel = actionFactory(CHANGE_CHANNEL)
 
 
 // client-initiated actions
-
-const actionFactory = (type) => (payload) => ({ type, payload })
 
 export const SET_USERNAME = 'SET_USERNAME'
 export const setUsername = actionFactory(SET_USERNAME)

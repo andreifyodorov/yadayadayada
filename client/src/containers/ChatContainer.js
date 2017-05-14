@@ -3,26 +3,32 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Chat from '../components/Chat.js'
+import Header from './HeaderContainer.js'
+import Channels from './ChannelsContainer.js'
 import Messages from './MessagesContainer.js'
 import Messagebox from '../components/Messagebox.js'
-import Users from './UsersContainer.js'
 import { Message, sendMessage } from '../actions.js'
 
 
-const ChatContainer = ({ dispatch, args }) => {
-  let message = R.curry(Message)(...args, R.__)
-  let action = R.compose(dispatch, sendMessage, message)
-
+const ChatContainer = ({ dispatch, messageAction }) => {
   return (
     <Chat>
+      <Header />
+      <Channels />
       <Messages />
-      <Messagebox action={action} />
+      <Messagebox action={messageAction} autoFocus />
     </Chat>
   )
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  args: [state.username, state.channel]
-})
+// const mapStateToProps = (state, ownProps) => ({
+//   args: [state.username, state.channel]
+// })
 
-export default connect(mapStateToProps)(ChatContainer)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  let message = R.curry(Message)(ownProps.username, ownProps.channel, R.__)
+  let messageAction = R.compose(dispatch, sendMessage, message)
+  return { messageAction }
+}
+
+export default connect(undefined, mapDispatchToProps)(ChatContainer)

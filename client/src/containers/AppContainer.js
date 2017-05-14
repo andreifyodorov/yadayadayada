@@ -1,4 +1,3 @@
-import R from 'ramda'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -8,18 +7,26 @@ import Chat from './ChatContainer.js'
 import { setUsername } from '../actions.js'
 
 
-const AppContainer = ({ dispatch, loggedIn }) => {
+const AppContainer = ({ dispatch, loggedIn, chat, loginAction }) => {
   return (
     <Pages>
       { loggedIn
-          ? <Chat />
-          : <Login action={ R.compose(dispatch, setUsername) } /> }
+          ? <Chat {...chat} />
+          : <Login action={loginAction} autoFocus /> }
     </Pages>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  loggedIn: Boolean(state.username)
+  loggedIn: Boolean(state.username),
+  chat: {
+    username: state.username,
+    channel: state.channel
+  }
 })
 
-export default connect(mapStateToProps)(AppContainer)
+const mapDispatchToProps = {
+  loginAction: setUsername
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)

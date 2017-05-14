@@ -60,7 +60,7 @@ export default class App {
     if (this.loggedIn) return
 
     this.loggedIn = true
-    console.log(`user ${username} logged in`)
+    // console.log('user %s logged in', username)
 
     this.username = username
     App.users.set(username, this)
@@ -76,10 +76,10 @@ export default class App {
   }
 
   addChatroom({ payload: chatroom }) {
-    this.chatrooms.add(chatroom)
+    App.chatrooms.add(chatroom)
 
     // this.echolist.send().broadcast()
-    let echolist = refreshFromServer(TYPE_ROOM, App.users.keys())
+    let echolist = refreshFromServer(TYPE_ROOM, App.chatrooms)
     this.send(echolist)
     this.broadcast(echolist)
   }

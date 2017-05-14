@@ -4,11 +4,12 @@ import PropTypes from 'prop-types'
 
 export default class Input extends Component {
   static propTypes = {
-    action: PropTypes.func.isRequired
+    action: PropTypes.func.isRequired,
+    autoFocus: PropTypes.bool
   }
 
   componentDidMount() {
-    this.refs.input.focus()
+    if (this.props.autoFocus) this.refs.input.focus()
   }
 
   _handleSubmit = e => {
