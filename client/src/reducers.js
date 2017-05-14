@@ -28,7 +28,6 @@ const messages = (state = Immutable.Map(), action) => {
   switch (action.type) {
     case SEND_MESSAGE:
     case SRV_SEND_MESSAGE:
-      console.log(action)
       let { payload: { username, channel, text } } = action
       let keyPath = [channel.type, channel.id]
       let message = { key: _.uniqueId(), username, text }

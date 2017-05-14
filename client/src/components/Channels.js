@@ -5,12 +5,20 @@ import '../style.css'
 import Channel from './Channel.js'
 
 
-const Channels = ({ channels, children }) => {
+const Channels = ({ title, channels, action, children }) => {
   return (
-    <ul className="channelList">
-      {channels.map(channel => <Channel key={channel} id={channel} /> )}
+    <div>
+      <h3>{title}</h3>
       {children}
-    </ul>
+      <ul className="channelsList">
+        {channels.map(channel =>
+          <Channel
+            key={channel}
+            id={channel}
+            onClick={() => action(channel)} />
+        )}
+      </ul>
+    </div>
   )
 }
 

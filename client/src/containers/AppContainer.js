@@ -7,11 +7,11 @@ import Chat from './ChatContainer.js'
 import { setUsername } from '../actions.js'
 
 
-const AppContainer = ({ dispatch, loggedIn, chat, loginAction }) => {
+const AppContainer = ({ dispatch, loggedIn, loginAction }) => {
   return (
     <Pages>
       { loggedIn
-          ? <Chat {...chat} />
+          ? <Chat />
           : <Login action={loginAction} autoFocus /> }
     </Pages>
   )
@@ -19,10 +19,6 @@ const AppContainer = ({ dispatch, loggedIn, chat, loginAction }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   loggedIn: Boolean(state.username),
-  chat: {
-    username: state.username,
-    channel: state.channel
-  }
 })
 
 const mapDispatchToProps = {

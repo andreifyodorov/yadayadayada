@@ -7,11 +7,11 @@ import '../style.css'
 
 const Header = ({ channel: {type, id} }) => {
   return (
-    <li className="header">
+    <div className="header">
       {type === TYPE_USER ? 'Private chat with' : 'Public room'}
       {' '}
       <b>{id}</b>
-    </li>
+    </div>
   )
 }
 

@@ -40,6 +40,28 @@ export default class App {
     this.socket.broadcast.emit('action', action)
   }
 
+  usernamesAction() {
+    return this._wrapper(refreshFromServer(TYPE_USER, App.users.keys()))
+  }
+
+  chatroomsAction() {
+    return this._wrapper(refreshFromServer(TYPE_ROOM, App.chatrooms))
+  }
+
+  _wrapper(action) {
+    let wrapped = {
+      send: () => {
+        this.send(action)
+        return wrapped
+      },
+      broadcast: () => {
+        this.broadcast(action)
+        return wrapped
+      }
+    }
+    return wrapped
+  }
+
   dispatchAction = action => {
     switch (action.type) {
       case SET_USERNAME:
@@ -65,23 +87,13 @@ export default class App {
     this.username = username
     App.users.set(username, this)
 
-    // this.nodelist.send().broadcast()
-    let nodelist = refreshFromServer(TYPE_USER, App.users.keys())
-    this.send(nodelist)
-    this.broadcast(nodelist)
-
-    // this.echolist.send()
-    let echolist = refreshFromServer(TYPE_ROOM, App.chatrooms)
-    this.send(echolist)
+    this.usernamesAction().send().broadcast()
+    this.chatroomsAction().send()
   }
 
   addChatroom({ payload: chatroom }) {
     App.chatrooms.add(chatroom)
-
-    // this.echolist.send().broadcast()
-    let echolist = refreshFromServer(TYPE_ROOM, App.chatrooms)
-    this.send(echolist)
-    this.broadcast(echolist)
+    this.chatroomsAction().send().broadcast()
   }
 
   dispatchMessage(action) {
@@ -91,9 +103,9 @@ export default class App {
 
     switch (channel.type) {
       case TYPE_USER:
-        let userTo = channel.id
-        message.channel.id = this.username
-        return App.users[userTo].send(action)
+        let userTo = App.users.get(channel.id)
+        action.payload.channel.id = this.username
+        return userTo.send(action)
 
       case TYPE_ROOM:
         return this.broadcast(action)
@@ -107,8 +119,7 @@ export default class App {
     this.loggedIn = false
 
     App.users.delete(this.username)
-    // notify everyone we left
-    this.broadcast(refreshFromServer(TYPE_USER, App.users.keys()))  // this.nodelist.broadcast()
+    this.usernamesAction().broadcast()  // notify everyone user left
   }
 
 }
