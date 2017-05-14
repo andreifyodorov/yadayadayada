@@ -8,7 +8,7 @@ import Message from './Message.js'
 class Messages extends Component {
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.number.isRequired,
+      key: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired
     }).isRequired).isRequired,
